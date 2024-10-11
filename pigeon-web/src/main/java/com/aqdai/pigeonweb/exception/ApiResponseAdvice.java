@@ -1,5 +1,6 @@
 package com.aqdai.pigeonweb.exception;
 
+import com.aqdai.pigeoncommon.exception.ApiResponse;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;

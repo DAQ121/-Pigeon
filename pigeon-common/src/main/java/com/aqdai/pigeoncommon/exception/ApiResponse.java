@@ -1,4 +1,4 @@
-package com.aqdai.pigeonweb.exception;
+package com.aqdai.pigeoncommon.exception;
 
 import lombok.Data;
 

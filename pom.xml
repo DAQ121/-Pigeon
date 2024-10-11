@@ -11,6 +11,8 @@
 
     <modules>
         <module>pigeon-web</module>
+        <module>pigeon-core</module>
+        <module>pigeon-common</module>
         <!-- 如果将来有其他子模块，也在此添加 -->
     </modules>
 

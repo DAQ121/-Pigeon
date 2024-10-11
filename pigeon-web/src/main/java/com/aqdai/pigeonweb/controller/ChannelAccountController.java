@@ -1,15 +1,20 @@
 package com.aqdai.pigeonweb.controller;
 
+import com.aqdai.pigeoncommon.exception.BusinessException;
+import com.aqdai.pigeoncore.MessageSender;
+import com.aqdai.pigeoncore.SenderManager;
 import com.aqdai.pigeonweb.entity.ChannelAccount;
-import com.aqdai.pigeonweb.exception.BusinessException;
 import com.aqdai.pigeonweb.service.ChannelAccountService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/channel-account")
@@ -17,6 +22,28 @@ public class ChannelAccountController {
 
     @Autowired
     private ChannelAccountService channelAccountService;
+
+    @PostMapping("/test-send-message")
+    public void testSendMessage(@RequestBody ChannelAccount channelAccount) {
+        // 将ChannelConfig字符串转换为Map<String, String>
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map config = null;
+        try {
+            config = objectMapper.readValue(channelAccount.getChannelConfig(), Map.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        // 获取并发送消息
+        MessageSender messageSender = SenderManager.getSender(
+                channelAccount.getId(),
+                channelAccount.getChannelTypeCode(),
+                config
+        );
+
+        // 发送消息
+        messageSender.test();
+    }
 
     // 查询所有渠道账号
     @GetMapping("/list")
