@@ -24,7 +24,7 @@ public class MyBatisPlusGenerator {
                             .xml("dao.mappers"); // Mapper XML 文件包名
                 })
                 .strategyConfig(builder -> {
-                    builder.addInclude("channel_type") // 设置需要生成的表名
+                    builder.addInclude("channel_account") // 设置需要生成的表名
                             .entityBuilder()
                             .enableLombok() // 启用 Lombok
                             .enableTableFieldAnnotation() // 启用字段注解

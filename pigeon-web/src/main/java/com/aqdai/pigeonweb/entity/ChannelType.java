@@ -11,8 +11,8 @@ import lombok.Data;
 @Data
 public class ChannelType extends BaseEntity{
 
-    private String channelName;
+    private String name;
 
-    private String channelCode;
+    private String code;
 
 }
